@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TODO App</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta charset='utf-8'>
+    <meta name="author" content="Rajendra Patil">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="todo.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="app">Loading...</div>
+    <script src="public/bundle.js" type="text/javascript"></script>
+</body>
+<script type="text/javascript">
+
+if (window.location.search.indexOf('#') < 0) { // To make it load when we launch from npm run build/dev
+	setTimeout(function() {
+    	window.location.href = '#';
+	}, 1000);
+}
+
+</script>
+
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "Simple TODO app",
+  "scripts": {
+    "dev": "open index.html && webpack -d --watch",
+    "build": "webpack -p && open index.html",
+    "ship": "zip -x=./public/* -x *.DS_Store* -x=./node_modules/* -r ../todo-app.zip ."
+  },
+  "author": "Rajendra Patil <rrpatil26@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.16.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "react": "^15.3.2",
+    "react-addons-update": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.2"
+  }
+}

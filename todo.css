@@ -1,0 +1,134 @@
+body {
+    background: #eee;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+    font-size: 14px;
+}
+
+.App {
+    margin: 0 auto;
+    background: #ddd;
+    border: 1px solid #ccc;
+    min-height: 99vh;
+    padding: 0;
+}
+
+.Header,
+.TypeHeader,
+.Container {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.Container {
+    flex-direction: column;
+}
+
+.TypeHeader {
+    background: #888;
+    padding: 10px;
+}
+
+.TypeHeader .label {
+    font-size: 26px;
+    color: #fff;
+}
+
+.Count {
+    text-align: center;
+    border-radius: 5px;
+    background: #fff;
+    padding: 10px;
+    border: 2px inset rgba(255, 255, 255, .6);
+    color: #555;
+    font-size: 14px;
+}
+
+.Count .countVal {
+    font-weight: bold;
+    color: #000;
+}
+
+.TypeList {
+    min-width: 32%;
+    margin: 10px 0;
+}
+
+.Header .total {
+    text-align: right;
+    padding: 0 10px;
+}
+
+.Header .align {
+    flex: 1;
+    line-height: 48px;
+}
+
+.Header .align.label {
+    white-space: nowrap;
+    padding: 0 10px;
+}
+
+.Header .align.input {
+    flex: 100;
+    text-align: left
+}
+
+.List {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    min-height: 0;
+    transition: all 1s;
+}
+
+.List li {
+    padding: 20px;
+    margin: 2px 0;
+    background: #fff;
+}
+
+.input input {
+    height: 30px;
+    font-size: 16px;
+    width: 100%;
+    min-width: 120px;
+}
+
+.Count .text {
+    font-size: .5em;
+}
+
+.ui-droppable-hover,
+.ui-sortable-helper {
+    background: #ccc;
+}
+
+.dhandle {
+    cursor: move;
+}
+
+.dhandle::before {
+    content: '\0268C';
+    display: inline-block;
+    font-size: 20px;
+    color: #eee;
+    padding-right: 5px;
+}
+
+@media screen and (min-width: 841px) {
+    .input input {
+        width: 60%;
+    }
+    .Container {
+        flex-direction: row;
+    }
+    .List {
+        min-height: 65vh;
+    }
+    .Count .text {
+        font-size: 1em;
+    }
+}
