@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "open index.html && webpack -d --watch",
     "build": "webpack -p && open index.html",
-    "ship": "zip -x=./public/* -x *.DS_Store* -x=./node_modules/* -r ../todo-app.zip ."
+    "ship": "zip -x=./.git* -x=./public/* -x *.DS_Store* -x=./node_modules/* -r ../todo-app.zip ."
   },
   "author": "Rajendra Patil <rrpatil26@gmail.com>",
   "license": "ISC",
