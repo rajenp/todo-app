@@ -14,7 +14,7 @@ class TypeList extends React.Component {
       <div className='TypeList'>
         <TypeHeader label={this.props.label} count={this.props.list.length} /> 
         <List list={this.props.list} type={this.props.type} />    
-      </div>  
+      </div>
     );
   }
 

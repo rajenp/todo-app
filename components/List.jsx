@@ -12,7 +12,7 @@ class List extends React.Component {
           {this.props.list.map(function(p) {
             return <li id={p.id} key={p.id}><span className='dhandle'></span> {p.name} </li>;
           })} 
-      </ul>           
+      </ul>
     );
   }
 }

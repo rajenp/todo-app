@@ -7,12 +7,12 @@ class Count extends React.Component {
   }
 
   render() {
-    var text = this.props.count === 1 ? 'PROJECT' : 'PROJECTS'; 
+    var text = this.props.count === 1 ? 'PROJECT' : 'PROJECTS';
     return (
       <div className='Count'>
         <div className='countVal'> {this.props.count}</div>
         <div className='text'> {text} </div>        
-      </div>  
+      </div>
     );
   }
 }

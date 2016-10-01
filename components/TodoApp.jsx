@@ -1,7 +1,7 @@
 import React from 'react';
 import Count from './Count.jsx';
 import TypeList from './TypeList.jsx';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 var update = require('react-addons-update');
 
 class TodoApp extends React.Component {
@@ -17,11 +17,11 @@ class TodoApp extends React.Component {
 
   findById(taskId) {
     var state = this.state;
-    const findInBucket = function (taskId, bucket) {
+    const findInBucket = function(taskId, bucket) {
       var res;
       state[bucket].some(function(task, index) {
         if (task.id === taskId) {
-          res = {bucket: bucket, index: index};
+          res = { bucket: bucket, index: index };
           return true;
         }
       });
@@ -46,9 +46,9 @@ class TodoApp extends React.Component {
       elem,
       taskId;
 
-    $('.List').sortable({containment: '.Container'});      
-    $( ".List" ).droppable({
-      tolerance: "intersect", 
+    $('.List').sortable({ containment: '.Container' });
+    $(".List").droppable({
+      tolerance: "intersect",
       drop: function(event, ui) {
         elem = ui.draggable[0] || (event.originalEvent.target || event.originalEvent.srcElement);
         taskId = Number(elem.getAttribute('id'));
@@ -56,7 +56,7 @@ class TodoApp extends React.Component {
           me.moveTask(taskId, this.getAttribute('data-type'));
           event.preventDefault();
           return false;
-        }          
+        }
       }
     });
   }
@@ -64,17 +64,19 @@ class TodoApp extends React.Component {
   add(event) {
     var elem = (event.target || event.srcElement),
       task,
-      newState;      
+      newState;
     if (event.keyCode == 13 && elem.value) {
-      task = {id: new Date().getTime(), name: elem.value};
+      task = { id: new Date().getTime(), name: elem.value };
       newState = update(this.state, {
         todo: {
-            $splice: [[0, 0, task]]
+          $splice: [
+            [0, 0, task]
+          ]
         }
       });
       this.setState(newState);
-      elem.value = '';    
-      this.enableDragAndDrop();  
+      elem.value = '';
+      this.enableDragAndDrop();
     }
   }
 
@@ -82,36 +84,46 @@ class TodoApp extends React.Component {
     var taskInfo = this.findById(taskId),
       task,
       newState;
-    
-    if(!taskInfo || taskInfo.bucket === toBucket) return; // Same bucket
+
+    if (!taskInfo || taskInfo.bucket === toBucket) return; // Same bucket
 
     task = taskInfo.task;
     newState = update(this.state, {
-      [[toBucket]]: {
-          $splice: [[0, 0, task]]
+      [
+        [toBucket]
+      ]: {
+        $splice: [
+          [0, 0, task]
+        ]
       },
-      [[taskInfo.bucket]]: {
-          $splice: [[taskInfo.index, 1]]
+      [
+        [taskInfo.bucket]
+      ]: {
+        $splice: [
+          [taskInfo.index, 1]
+        ]
       }
     });
-    this.setState(newState);  
+    this.setState(newState);
   }
 
   reorderTask(taskId, toIndex) {
     var taskInfo = this.findById(taskId),
       list,
       newState;
-    
-    if(!taskInfo) return;
-    
+
+    if (!taskInfo) return;
+
     list = this.state[taskInfo.bucket];
     list.splice(toIndex, 0, list.splice(taskInfo.index, 1)[0]);
     newState = update(this.state, {
-      [[taskInfo.bucket]]: {
-          $set: list
+      [
+        [taskInfo.bucket]
+      ]: {
+        $set: list
       }
     });
-    this.setState(newState);   
+    this.setState(newState);
   }
 
   render() {

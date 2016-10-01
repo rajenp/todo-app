@@ -12,7 +12,7 @@ class TypeHeader extends React.Component {
       <div className='TypeHeader'>
         <div className='label'> {this.props.label} </div>
         <Count count={this.props.count} />
-      </div>  
+      </div>
     );
   }
 
