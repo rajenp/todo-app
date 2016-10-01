@@ -57,7 +57,7 @@ class TodoApp extends React.Component {
       $( ".List" ).droppable({
         tolerance: "intersect", 
         drop: function(event, ui) {
-          var elem = (event.originalEvent.target || event.originalEvent.srcElement);
+          var elem = ui.draggable[0] || (event.originalEvent.target || event.originalEvent.srcElement);
           var taskId = Number(elem.getAttribute('id'));
           if (this !== elem.parentNode) {
             var type = this.getAttribute('data-type');
