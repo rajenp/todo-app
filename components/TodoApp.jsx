@@ -8,7 +8,6 @@ class TodoApp extends React.Component {
 
   constructor(props) {
     super(props);
-    this._taskIdMap = {}; // For easy lookup 
     this.state = {
       todo: [],
       progress: [],
@@ -28,6 +27,7 @@ class TodoApp extends React.Component {
       });
       return res;
     };
+
     var res = findInBucket(taskId, 'todo');
     if (!res) {
       res = findInBucket(taskId, 'progress');
@@ -157,5 +157,3 @@ class TodoApp extends React.Component {
 }
 
 render(<TodoApp />, document.getElementById('app'));
-
-//export default TodoApp;
