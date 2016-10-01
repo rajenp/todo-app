@@ -41,95 +41,72 @@ class TodoApp extends React.Component {
     return res;
   }
 
+  enableDragAndDrop() {
+    var me = this,
+      elem,
+      taskId;
+
+    $('.List').sortable({containment: '.Container'});      
+    $( ".List" ).droppable({
+      tolerance: "intersect", 
+      drop: function(event, ui) {
+        elem = ui.draggable[0] || (event.originalEvent.target || event.originalEvent.srcElement);
+        taskId = Number(elem.getAttribute('id'));
+        if (taskId && this !== elem.parentNode) { // Cross list
+          me.movetask(taskId, this.getAttribute('data-type'));
+          event.preventDefault();
+          return false;
+        }          
+      }
+    });
+  }
+
   add(event) {
-    var elem = (event.target || event.srcElement);      
+    var elem = (event.target || event.srcElement),
+      task,
+      newState;      
     if (event.keyCode == 13 && elem.value) {
-      var task = {id: new Date().getTime(), name: elem.value};
-      var newState = update(this.state, {
+      task = {id: new Date().getTime(), name: elem.value};
+      newState = update(this.state, {
         todo: {
             $splice: [[0, 0, task]]
         }
       });
       this.setState(newState);
-      elem.value = '';
-      $('.List').sortable({containment: '.Container'});
-      var me = this;
-      $( ".List" ).droppable({
-        tolerance: "intersect", 
-        drop: function(event, ui) {
-          var elem = ui.draggable[0] || (event.originalEvent.target || event.originalEvent.srcElement);
-          var taskId = Number(elem.getAttribute('id'));
-          if (this !== elem.parentNode) {
-            var type = this.getAttribute('data-type');
-            if (type === 'todo') {
-              me.markOpen(taskId);
-            } else if (type === 'progress') {
-              me.markInProgress(taskId);
-            } else if (type === 'done') {
-              me.markDone(taskId);
-            }
-            event.preventDefault();
-            return false;
-          }          
-        }
-      });
+      elem.value = '';    
+      this.enableDragAndDrop();  
     }
   }
 
-  markOpen(taskId) {
-    var taskInfo = this.findById(taskId);
-    if(!taskInfo || taskInfo.bucket === 'todo') return;
+  moveTask(taskId, toBucket) {
+    var taskInfo = this.findById(taskId),
+      task,
+      newState;
+    
+    if(!taskInfo || taskInfo.bucket === toBucket) return; // Same bucket
 
-    var task = taskInfo.task;
-    var newState = update(this.state, {
-      todo: {
+    task = taskInfo.task;
+    newState = update(this.state, {
+      [[toBucket]]: {
           $splice: [[0, 0, task]]
       },
       [[taskInfo.bucket]]: {
           $splice: [[taskInfo.index, 1]]
       }
     });
-    this.setState(newState);
-  }
-
-  markInProgress(taskId) {
-    var taskInfo = this.findById(taskId);
-    if(!taskInfo || taskInfo.bucket === 'progress') return;
-
-    var task = taskInfo.task;
-    var newState = update(this.state, {
-      progress: {
-          $splice: [[0, 0, task]]
-      },
-      [[taskInfo.bucket]]: {
-          $splice: [[taskInfo.index, 1]]
-      }
-    });
-    this.setState(newState);    
-  }
-
-  markDone(taskId) {
-    var taskInfo = this.findById(taskId);
-    if(!taskInfo || taskInfo.bucket === 'done') return;
-
-    var task = taskInfo.task;
-    var newState = update(this.state, {
-      done: {
-          $splice: [[0, 0, task]]
-      },
-      [[taskInfo.bucket]]: {
-          $splice: [[taskInfo.index, 1]]
-      }
-    });
-    this.setState(newState);   
+    this.setState(newState);  
   }
 
   reorderTask(taskId, toIndex) {
-    var taskInfo = this.findById(taskId);
+    var taskInfo = this.findById(taskId),
+      list,
+      newState;
+    
     if(!taskInfo) return;
-    var list = this.state[taskInfo.bucket];
+    
+    list = this.state[taskInfo.bucket];
     list.splice(toIndex, 0, list.splice(taskInfo.index, 1)[0]);
-    var newState = update(this.state, {
+    newState = update(this.state, {
       [[taskInfo.bucket]]: {
           $set: list
       }
