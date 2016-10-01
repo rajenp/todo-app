@@ -6,4 +6,4 @@ This is the basic task manager app built using react.
 
 It needs node, npm, webpack and dependecies to run. 
 
-`npm install && npm run build`
+`git clone git@github.com:rpatil26/todo-app.git && cd todo-app && npm install && npm run build`
