@@ -53,7 +53,7 @@ class TodoApp extends React.Component {
         elem = ui.draggable[0] || (event.originalEvent.target || event.originalEvent.srcElement);
         taskId = Number(elem.getAttribute('id'));
         if (taskId && this !== elem.parentNode) { // Cross list
-          me.movetask(taskId, this.getAttribute('data-type'));
+          me.moveTask(taskId, this.getAttribute('data-type'));
           event.preventDefault();
           return false;
         }          
