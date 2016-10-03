@@ -1,7 +1,7 @@
 import React from 'react';
 import Count from './Count.jsx'
 
-class TypeHeader extends React.Component {
+class ListHeader extends React.Component {
 
   constructor(props) {
     super(props);
@@ -9,7 +9,7 @@ class TypeHeader extends React.Component {
 
   render() {
     return (
-      <div className='TypeHeader'>
+      <div className='ListHeader'>
         <div className='label'> {this.props.label} </div>
         <Count count={this.props.count} />
       </div>
@@ -18,4 +18,4 @@ class TypeHeader extends React.Component {
 
 }
 
-export default TypeHeader;
+export default ListHeader;

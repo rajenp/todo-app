@@ -1,6 +1,6 @@
 import React from 'react';
 import Count from './Count.jsx';
-import TypeList from './TypeList.jsx';
+import TodoList from './TodoList.jsx';
 import { render } from 'react-dom';
 var update = require('react-addons-update');
 
@@ -46,8 +46,8 @@ class TodoApp extends React.Component {
       elem,
       taskId;
 
-    $('.List').sortable({ containment: '.Container' });
-    $(".List").droppable({
+    $('.ListBody').sortable({ containment: '.Container' });
+    $(".ListBody").droppable({
       tolerance: "intersect",
       drop: function(event, ui) {
         elem = ui.draggable[0] || (event.originalEvent.target || event.originalEvent.srcElement);
@@ -136,9 +136,9 @@ class TodoApp extends React.Component {
           <Count count={this.state.todo.length + this.state.progress.length + this.state.done.length} />
         </div> 
         <div className='Container'>
-          <TypeList list={this.state.todo} type='todo' label='To do'/>
-          <TypeList list={this.state.progress} type='progress' label='In Progress'/>
-          <TypeList list={this.state.done} type='done' label='Done'/>
+          <TodoList type='todo' list={this.state.todo} label='To do'/>
+          <TodoList type='progress' list={this.state.progress} label='In Progress'/>
+          <TodoList type='done' list={this.state.done} label='Done'/>
         </div>
       </div>
     );

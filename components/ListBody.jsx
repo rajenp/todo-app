@@ -1,6 +1,6 @@
 import React from 'react';
 
-class List extends React.Component {
+class ListBody extends React.Component {
 
   constructor(props) {
     super(props);
@@ -8,7 +8,7 @@ class List extends React.Component {
 
   render() {
     return (
-      <ul data-type={this.props.type} className='List'>
+      <ul data-type={this.props.type} className='ListBody'>
           {this.props.list.map(function(p) {
             return <li id={p.id} key={p.id}><span className='dhandle'></span> {p.name} </li>;
           })} 
@@ -17,4 +17,4 @@ class List extends React.Component {
   }
 }
 
-export default List;
+export default ListBody;
