@@ -1,7 +1,5 @@
 import React from 'react';
-import ListHeader from './ListHeader.jsx'
-import ListBody from './ListBody.jsx'
-
+import Count from './Count.jsx'
 
 class TodoList extends React.Component {
 
@@ -12,8 +10,15 @@ class TodoList extends React.Component {
   render() {
     return (
       <div className='TodoList'>
-        <ListHeader label={this.props.label} count={this.props.list.length} /> 
-        <ListBody list={this.props.list} type={this.props.type} />    
+        <div className='ListHeader'>
+          <div className='label'> {this.props.label} </div>
+          <Count count={this.props.list.length} />
+        </div>
+        <ul data-type={this.props.type} className='ListBody'>
+          {this.props.list.map(function(p) {
+            return <li id={p.id} key={p.id}><span className='dhandle'></span> {p.name} </li>;
+          })} 
+        </ul>   
       </div>
     );
   }
